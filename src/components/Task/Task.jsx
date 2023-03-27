@@ -7,22 +7,22 @@ const Task = ({ task }) => {
   const [editMode, setEditMode] = useState(false);
   const [editName, setEditName] = useState(task.name);
 
-  const handleDeleteTask = () => {
+  const handleDeleteTask = useCallback(() => {
     dispatch(deleteTask(task));
-  };
+  }, [dispatch, task]);
 
-  const handleToggleDone = () => {
+  const handleToggleDone = useCallback(() => {
     dispatch(toggleDone(task));
-  };
+  }, [dispatch, task]);
 
-  const handleEditClick = () => {
+  const handleEditClick = useCallback(() => {
     setEditMode(true);
-  };
+  }, []);
 
-  const handleCancelEdit = () => {
+  const handleCancelEdit = useCallback(() => {
     setEditMode(false);
     setEditName(task.name);
-  };
+  }, [task]);
 
   const handleSaveTask = useCallback(() => {
     dispatch(editTask({ ...task, name: editName }));
